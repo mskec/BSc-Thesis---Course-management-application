@@ -1,0 +1,70 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Course definition</div>
+
+        <div class="panel-body">
+            <form name="form" role="form" novalidate>
+                <div class="form-group" ng-class="{'has-error': form.name.$dirty && form.name.$invalid}">
+                    <label for="name">Course name</label>
+                    <input type="text" ng-model="course.name" ng-maxlength="255" ng-required="true" class="form-control" id="name" name="name" placeholder="Enter course name">
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': form.shortDescription.$dirty && form.shortDescription.$invalid}">
+                    <label class="" for="shortDescription">Short description</label>
+                    <textarea ng-model="course.shortDescription" ng-maxlength="1024" ng-required="true" rows="3" class="form-control" name="shortDescription" id="shortDescription" placeholder="Enter short description"></textarea>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': form.category.$dirty && form.category.$invalid}">
+                    <label for="category">Category</label>
+                    <select ng-model="course.category" ng-options="c as c.displayName for (id, c) in categories track by c.id" ng-required="true" class="form-control" name="category" id="category"></select>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': form.keywords.$dirty && form.keywords.$invalid}">
+                    <label for="keywords">Keywords</label>
+                    <input type="text" ng-model="course.keywords" ng-list="/\s*,\s*/" class="form-control" name="keywords" id="keywords" placeholder="Enter keywords">
+                    <span class="help-block">Delimiter between multiple keywords is comma with optional spaces.</span>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': form.description.$dirty && form.description.$invalid}">
+                    <label for="description">Detailed description</label>
+                    <textarea ng-model="course.description" rows="5" class="form-control" name="description" id="description" placeholder="Enter detailed description"></textarea>
+                </div>
+                <button ng-click="save()" ng-disabled="form.$invalid || form.$pristine" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </button>
+
+                <div class="pull-right">
+                    <button ng-click="delete()" ng-show="course.id" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </button>
+                    <button ng-click="reset()" ng-show="form.$dirty" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh"></span> Reset
+                    </button>
+                </div>
+            </form>
+        </div><!-- div panel-body -->
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div class="panel panel-info" ng-show="debug.visible">
+        <div class="panel-heading">
+            <button type="button" class="close" ng-click="debug.visible = false" aria-hidden="true">&times;</button>
+            Debug panel
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <pre>Form status = {
+    dirty: {{ form.$dirty }}
+}</pre>
+            </div>
+            <div class="col-md-6">
+                <pre>Working CourseDefinition = {{course | json}}</pre>
+            </div>
+            <div class="col-md-6">
+                <pre>Master CourseDefinition = {{masterCourse | json}}</pre>
+            </div>
+        </div>
+    </div>
+</div>

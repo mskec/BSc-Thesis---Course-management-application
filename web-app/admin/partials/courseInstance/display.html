@@ -1,0 +1,234 @@
+<div class="col-md-8 col-md-offset-2">
+
+    <div class="header-button">
+        <h3><a href="#/course/display/{{ course.id }}">{{ course.name }}</a></h3>
+        <div class="btn-group pull-right">
+            <a href="#/courseInstance/form/{{ course.id }}/{{ courseInstance.id }}" class="btn btn-xs btn-warning">
+                <span class="fa fa-pencil"></span> Edit
+            </a>
+            <button class="btn btn-xs btn-danger" ng-click="delete()">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </button>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <td><strong>Location</strong></td>
+            <td>{{ courseInstance.location }}</td>
+        </tr>
+        <tr>
+            <td><strong>Lecturer</strong></td>
+            <td>{{ courseInstance.lecturer.displayName }}</td>
+        </tr>
+        <tr>
+            <td><strong>Participents</strong></td>
+            <td>{{ courseInstance.maxNumberOfParticipants }}</td>
+        </tr>
+        <tr>
+            <td><strong>Start time</strong></td>
+            <td>{{ courseInstance.startTime | myDate }}</td>
+        </tr>
+        <tr>
+            <td><strong>End time</strong></td>
+            <td>{{ courseInstance.endTime | myDate }}</td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="btn-group pull-right">
+            <button class="btn btn-success" ng-disabled="!statusChangeable" ng-click="markAsHeld(courseInstance)"><span class="fa fa-check"></span> Mark as held</button>
+            <button class="btn btn-danger" ng-disabled="!statusChangeable" ng-click="cancelCourse(courseInstance)">Cancel course</button>
+        </div>
+    </div>
+
+    <br>
+
+    <tabset justified="true">
+        <tab heading="Participants">
+            <div id="courseUser-preRegisteredUsers" ng-if="courseInstance.preRegisteredUsers">
+                <button class="btn btn-link btn-lg" ng-click="collapseManager.preregistration = !collapseManager.preregistration">
+                    <span class="fa" ng-class="{'fa-chevron-down': collapseManager.preregistration, 'fa-chevron-up': !collapseManager.preregistration}"></span> Pre-registration
+                </button>
+                <div class="table-responsive" collapse="collapseManager.preregistration">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Active</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="courseUser in courseInstance.preRegisteredUsers">
+                            <td>{{ courseUser.user.displayName }}</td>
+                            <td>{{ (courseUser.active ? 'Yes' : 'No') }}</td>
+                            <td>{{ courseUser.comment }}</td>
+                            <td>{{ courseUser.creationDate | myDate }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+
+            <div id="courseUser-registeredUsers" ng-if="courseInstance.registeredUsers">
+                <button class="btn btn-link btn-lg" ng-click="collapseManager.registration = !collapseManager.registration">
+                    <span class="fa" ng-class="{'fa-chevron-down': collapseManager.registration, 'fa-chevron-up': !collapseManager.registration}"></span> Registration
+                </button>
+                <div class="table-responsive" collapse="collapseManager.registration">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Active</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="courseUser in courseInstance.registeredUsers">
+                            <td>{{ courseUser.user.displayName }}</td>
+                            <td>{{ (courseUser.active ? 'Yes' : 'No') }}</td>
+                            <td>{{ courseUser.comment }}</td>
+                            <td>{{ courseUser.creationDate | myDate }}</td>
+                            <td class="ad-action-col-xs">
+                                <div class="btn-group ad-action-btn-xs" ng-show="courseUser.active">
+                                    <button class="btn btn-xs btn-primary" ng-disabled="!courseUser.active" ng-click="acceptUser(courseUser)"><span class="fa fa-check"></span> Accept</button>
+                                    <button class="btn btn-xs btn-danger" ng-disabled="!courseUser.active" ng-click="declineUser(courseUser)"><span class="glyphicon glyphicon-remove"></span> Decline</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+
+            <div id="courseUser-accepted" ng-if="courseInstance.acceptedUsers.length > 0">
+                <button class="btn btn-link btn-lg" ng-click="collapseManager.accepted = !collapseManager.accepted">
+                    <span class="fa" ng-class="{'fa-chevron-down': collapseManager.accepted, 'fa-chevron-up': !collapseManager.accepted}"></span> Accepted
+                </button>
+                <div class="table-responsive" collapse="collapseManager.accepted">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Active</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="courseUser in courseInstance.acceptedUsers">
+                            <td>{{ courseUser.user.displayName }}</td>
+                            <td>{{ (courseUser.active ? 'Yes' : 'No') }}</td>
+                            <td>{{ courseUser.comment }}</td>
+                            <td>{{ courseUser.creationDate | myDate }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+
+            <div id="courseUser-declined" ng-if="courseInstance.declinedUsers.length > 0">
+                <button class="btn btn-link btn-lg" ng-click="collapseManager.declined = !collapseManager.declined">
+                    <span class="fa" ng-class="{'fa-chevron-down': collapseManager.declined, 'fa-chevron-up': !collapseManager.declined}"></span> Declined
+                </button>
+                <div class="table-responsive" collapse="collapseManager.declined">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Active</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="courseUser in courseInstance.declinedUsers">
+                            <td>{{ courseUser.user.displayName }}</td>
+                            <td>{{ (courseUser.active ? 'Yes' : 'No') }}</td>
+                            <td>{{ courseUser.comment }}</td>
+                            <td>{{ courseUser.creationDate | myDate }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab><!-- End participants tab -->
+
+        <tab heading="Course materials">
+
+            <h3>Upload new material</h3>
+            <div class="row">
+                <progressbar class="progress-striped active" value="upload.progress" type="success" ng-show="upload.progress"></progressbar>
+                <form class="form-inline" role="form" ng-submit="upload.start()">
+                    <div class="form-group">
+                        <input type="file" ng-file-select="upload.onFileSelect($files)">
+                    </div>
+
+                    <!-- TODO dodaj drag & drop -->
+
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary" ng-disabled="upload.selectedFiles == 0">Upload</button>
+                    </div>
+                </form>
+            </div><!-- End upload form -->
+
+            <h3>Course materials</h3>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Material name</th>
+                                <th>Upload date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="document in documents">
+                                <td>{{ document.fileName }}</td>
+                                <td>{{ document.uploadDate | myDate }}</td>
+                                <td class="dd-action-col-xs">
+                                    <div class="btn-group dd-action-btn-xs">
+                                        <a target="_blank" href="{{ restrictedUrl }}/document/download?id={{ document.id }}" class="btn btn-xs btn-primary"><span class="fa fa-cloud-download"></span> Download</a>
+                                        <button class="btn btn-xs btn-danger" ng-click="deleteDocument($index)"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="documents.length == 0">
+                                <td colspan="3">
+                                    <h4 class="text-center">No course materials.</h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- End document table -->
+
+        </tab><!-- End documents tab -->
+    </tabset>
+
+</div>
+
+<script type="text/ng-template" id="courseUserComment.html">
+    <div class="modal-header">
+        <h3 class="modal-title">You are about to {{ titleMessage }} <strong>{{ user.displayName }}</strong></h3>
+    </div>
+    <div class="modal-body">
+        <form name="form" role="form">
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <input type="text" ng-model="courseUser.comment" ng-maxlength="255" class="form-control" id="comment" name="comment" placeholder="Enter comment">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="submit(courseUser)">Submit</button>
+        <button class="btn btn-warning" ng-click="courseUserModal.dismiss()">Cancel</button>
+    </div>
+</script>

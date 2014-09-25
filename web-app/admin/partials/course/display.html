@@ -1,0 +1,84 @@
+
+<div class="col-md-8 col-md-offset-2">
+
+    <div class="header-button">
+        <h3>Course definition</h3>
+        <div class="btn-group pull-right">
+            <a href="#/course/form/{{ course.id }}" class="btn btn-xs btn-warning">
+                <span class="fa fa-pencil"></span> Edit
+            </a>
+            <button class="btn btn-xs btn-danger" ng-click="delete()">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </button>
+        </div>
+    </div>
+    <table class="table" id="course-display">
+        <tr>
+            <td><strong>Name</strong></td>
+            <td>{{ course.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Short description</strong></td>
+            <td>{{ course.shortDescription }}</td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td>{{ course.description }}</td>
+        </tr>
+        <tr>
+            <td><strong>Category</strong></td>
+            <td>{{ course.category.displayName }}</td>
+        </tr>
+        <tr>
+            <td><strong>Keywords</strong></td>
+            <td>{{ course.keywords.join(', ') }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="header-button">
+        <h3>Course instances</h3>
+            <a href="#/courseInstance/form/{{ course.id }}" class="btn btn-xs btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span> New instance
+            </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Start time</th>
+                    <!--<th>End time</th>-->
+                    <th>Lecturer</th>
+                    <th>Participants</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="courseInstance in course.courseInstances | orderBy:'startTime'">
+                    <td><a href="#/courseInstance/display/{{ course.id }}/{{ courseInstance.id }}">{{ courseInstance.id }}</a></td>
+                    <td>{{ courseInstance.status }}</td>
+                    <td>{{ courseInstance.startTime | myDate }}</td>
+                    <!--<td>{{ courseInstance.endTime | myDate }}</td>-->
+                    <td>{{ courseInstance.lecturer.displayName }}</td>
+                    <td>{{ courseInstance.maxNumberOfParticipants }}</td>
+                    <td>{{ courseInstance.location }}</td>
+                    <td class="ed-action-col-xs">
+                        <div class="btn-group ed-action-btn-xs">
+                            <a href="#/courseInstance/form/{{ course.id }}/{{ courseInstance.id }}" class="btn btn-xs btn-warning">
+                                <span class="fa fa-pencil"></span> Edit
+                            </a>
+                            <button class="btn btn-xs btn-danger" ng-click="deleteCourseInstance($index)">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- div table-responsive -->
+
+</div>

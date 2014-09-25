@@ -1,0 +1,56 @@
+<h2 class="text-justify">{{ course.name }}</h2>
+
+<dl class="dl-list">
+    <dt>Category</dt>
+    <dd>{{ course.category.displayName }}</dd>
+
+    <dt>Short description</dt>
+    <dd class="text-justify">{{ course.shortDescription }}</dd>
+
+    <dt>Description</dt>
+    <dd class="text-justify">{{ course.description }}</dd>
+
+    <dt>Average grade</dt>
+    <dd>{{ course.averageGrade }}</dd>
+
+    <dt>Keywords</dt>
+    <dd class="text-justify">{{ course.keywords.join(', ') }}</dd>
+</dl>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h4>Upcoming courses:</h4>
+        <div class="list-group">
+            <a href="#/course/instance/{{ courseInstance.id }}" class="list-group-item" ng-repeat="courseInstance in course.upcoming"  ng-init="isRegistered(courseInstance)">
+                <table class="table">
+                    <tr>
+                        <td><strong>Start time</strong></td>
+                        <td>{{ courseInstance.startTime | myDate }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>End time</strong></td>
+                        <td>{{ courseInstance.endTime | myDate }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lecturer</strong></td>
+                        <td>{{ courseInstance.lecturer.displayName }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location</strong></td>
+                        <td>{{ courseInstance.location }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="help-block text-center">Click for details</div>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+
+            <div class="list-group-item text-center" ng-if="course.upcoming.length == 0">
+                <h4 class="list-group-item-heading">No course instances at this time</h4>
+                <p class="list-group-item-text help-block">Please come back later</p>
+            </div>
+        </div>
+    </div>
+</div>

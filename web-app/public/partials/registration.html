@@ -1,0 +1,53 @@
+<div class="col-sm-4 col-sm-offset-4 nopadding">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Registration form</h4>
+        </div>
+
+        <div class="panel-body">
+            <form name="regForm" ng-submit="registration(user)" novalidate>
+
+                <div class="form-group" ng-class="{'has-error': regForm.username.$dirty && regForm.username.$invalid}">
+                    <label for="username" class="sr-only">Username</label>
+                    <p class="help-block" ng-show="regForm.username.$dirty && regForm.username.$invalid">Username is required.</p>
+                    <input type="text" ng-model="user.username" class="form-control" name="username" id="username" placeholder="Username" required />
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': regForm.email.$dirty && regForm.email.$invalid}">
+                    <label for="email" class="sr-only">Email address</label>
+                    <p class="help-block" ng-show="regForm.email.$dirty && regForm.email.$error.required">Email is required.</p>
+                    <p class="help-block" ng-show="regForm.email.$error.email">Email is invalid.</p>
+                    <input type="email" ng-model="user.email" class="form-control" name="email" id="email" placeholder="Email" required />
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': regForm.firstName.$dirty && regForm.firstName.$invalid}">
+                    <label for="firstName" class="sr-only">First name</label>
+                    <p class="help-block" ng-show="regForm.firstName.$dirty && regForm.firstName.$invalid">First name is required.</p>
+                    <input type="text" ng-model="user.firstName" class="form-control" name="firstName" id="firstName" placeholder="First name" required />
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': regForm.lastName.$dirty && regForm.lastName.$invalid}">
+                    <label for="lastName" class="sr-only">Last name</label>
+                    <p class="help-block" ng-show="regForm.lastName.$dirty && regForm.lastName.$invalid">Last name is required.</p>
+                    <input type="text" ng-model="user.lastName" class="form-control" name="lastName" id="lastName" placeholder="Last name" required />
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': (regForm.password.$dirty && regForm.password.$invalid) || passwordsMatchError}">
+                    <label for="password" class="sr-only">Password</label>
+                    <p class="help-block" ng-show="regForm.password.$dirty && regForm.password.$invalid">Password is required.</p>
+                    <p class="help-block" ng-show="passwordsMatchError">Passwords does not match.</p>
+                    <input type="password" ng-model="user.password" class="form-control" name="password" id="password" placeholder="Password" required />
+                </div>
+
+                <div class="form-group"  ng-class="{'has-error': (regForm.password_verify.$dirty && regForm.password_verify.$invalid) || passwordsMatchError}">
+                    <label for="password_verify" class="sr-only">Repeat password</label>
+                    <p class="help-block" ng-show="regForm.password_verify.$dirty && regForm.password_verify.$invalid">You must verify password.</p>
+                    <p class="help-block" ng-show="passwordsMatchError">Passwords does not match.</p>
+                    <input type="password" ng-model="password_verify" class="form-control" name="password_verify" id="password_verify" placeholder="Repeat password" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary pull-right" ng-disabled="regForm.$invalid">Submit</button>
+            </form>
+        </div><!-- Panel body end -->
+    </div><!-- Panel end -->
+</div>

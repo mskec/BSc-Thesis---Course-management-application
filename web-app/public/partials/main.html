@@ -1,0 +1,13 @@
+<h2>Welcome to CourseMan</h2>
+<p class="lead text-justify">
+    CourseMan allows you to easily search and browse different courses. You can find out more about course and time of event by clicking on details. By registration, you can register for course and get newest course materials.
+</p>
+
+<h3>Upcoming courses:</h3>
+<div class="list-group">
+    <a href="#/course/display/{{ courseDefinition.id }}" class="list-group-item" ng-repeat="courseInstance in courseInstances" ng-init="courseDefinition = courseInstance.courseDefinition">
+        <h4>{{ courseDefinition.name }}</h4>
+        <p class="list-group-item-text text-justify">{{ courseDefinition.shortDescription }}</p>
+        <p class="list-group-item-text text-justify"><b>Start time:</b> {{ courseInstance.startTime | myDate }}h</p>
+    </a>
+</div>

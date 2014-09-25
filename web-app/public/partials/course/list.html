@@ -1,0 +1,7 @@
+<h3>All courses</h3>
+<div class="list-group">
+    <a href="#/course/display/{{ course.id }}" class="list-group-item" ng-repeat="course in courses">
+        <h4>{{ course.name }}</h4>
+        <p class="list-group-item-text text-justify">{{ course.shortDescription }}</p>
+    </a>
+</div>

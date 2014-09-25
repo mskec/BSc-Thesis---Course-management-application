@@ -1,0 +1,99 @@
+/* Override */
+.nav > li > h4 {
+    padding-left: 15px;
+}
+
+.navbar-default .navbar-text {
+    color: #ffffff;
+}
+
+.modal-body {
+    padding-bottom: 5px;
+}
+
+.panel-primary > .panel-heading > h4 {
+    color: #ffffff;
+}
+
+.has-error .form-control {
+    border-color: #ffaaaa;
+}
+
+.has-error .form-control:focus {
+    border-color: #ffaaaa;
+    box-shadow: 0 0 0.5em #ffaaaa;
+}
+
+a.list-group-item .list-group-item-heading {
+    color: #317eac;
+}
+
+h2 > a:hover, h2 > a:focus {
+    text-decoration: none;
+}
+/* End override */
+
+
+/* Application */
+.nopadding {
+    padding: 0;
+}
+
+#main-content {
+    margin-bottom: 60px;
+}
+
+#notification-count {
+    margin-left: 0;
+    top: -4.5px;
+}
+
+@media (max-width: 350px) {
+    .navbar-icon {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .navbar-brand {
+        padding-left: 7px;
+        padding-right: 2px;
+    }
+}
+.navbar-icon {
+    color: #ffffff;
+    margin: 3px auto 0;
+    font-size: 20px;
+}
+
+.navbar-icon-group {
+    text-align: center;
+}
+
+.status-block {
+    display: block;
+    color: #959595;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .status-block {
+        padding-right: 0;
+    }
+}
+/* End application */
+
+
+/* Course display */
+.dl-list > dd {
+    padding-bottom: 10px;
+}
+
+.list-group-item table {
+     margin: 0;
+ }
+
+.list-group-item table tr:first-child td {
+    border-top: none;
+}
+/* End course display */

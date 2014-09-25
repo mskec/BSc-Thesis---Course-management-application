@@ -1,0 +1,111 @@
+/* Override */
+textarea.form-control {
+    resize: vertical;
+}
+
+/*input.ng-invalid, select.ng-invalid, textarea.ng-invalid {*/
+    /*background: #fff3f3;*/
+    /*border-color: #ffaaaa;*/
+/*}*/
+/*input.ng-invalid:focus, select.ng-invalid:focus, textarea.ng-invalid:focus {*/
+    /*border-color: #ffaaaa;*/
+    /*box-shadow: 0 0 0.5em #ffaaaa;*/
+/*}*/
+
+.center-block {
+    float: none;
+}
+/* End Override */
+
+
+/* Flatly theme overrides */
+a:hover {
+    text-decoration: none;
+}
+.table a {
+    text-decoration: none;
+}
+.btn-link:hover, .btn-link:focus {
+    text-decoration: none;
+}
+/* End flatly theme overrides */
+
+/* Application */
+#main-content {
+    margin-bottom: 70px;
+}
+
+.status-block {
+    display: block;
+    color: #959595;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+div.link {
+    cursor: pointer;
+}
+div.link:hover, div.link:focus {
+    background-color: #ecf0f1;
+}
+/* End application */
+
+/* Display screen */
+.header-button * {
+    display: inline;
+}
+/* End display screen */
+
+/* Login form */
+#login-form {
+    margin-top: 200px;
+}
+/* End login form */
+
+/* Course definition */
+#course-display td:first-child {
+    width: 20%;
+}
+#course-display td:last-child {
+    width: 80%;
+    text-align: justify;
+}
+/* End course definition */
+
+
+/* Course instance */
+.control-date-date {
+    margin-top: 10px;
+}
+
+.control-date-clear {
+    margin-top: 34px;
+    margin-left: 19px;
+}
+/* End course instance */
+
+/* Table action col */
+/* ed: Edit Delete */
+.ed-action-col-xs {
+    width: 131px;
+}
+.ed-action-btn-xs {
+    width: 115px;
+}
+
+/* dd: Download Delete */
+.dd-action-col-xs {
+    width: 169px;
+}
+.dd-action-btn-xs {
+    width: 153px;
+}
+
+/* ad: Accept Decline */
+.ad-action-col-xs {
+    width: 160px;
+}
+.ad-action-btn-xs {
+    width: 138px;
+}
+/* End table action col*/

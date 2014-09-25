@@ -1,0 +1,111 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <a href="#/course/display/{{ course.id }}">{{ course.name }}</a> / Course instance
+        </div>
+
+        <div class="panel-body">
+            <form name="form" role="form" novalidate>
+                <div class="form-group" ng-class="{'has-error': form.location.$dirty && form.location.$invalid}">
+                    <label for="location">Location</label>
+                    <input type="text" ng-model="courseInstance.location" ng-maxlength="255" ng-required="true" class="form-control" id="location" name="location" placeholder="Enter location">
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6" ng-class="{'has-error': form.maxNumberOfParticipants.$dirty && form.maxNumberOfParticipants.$invalid}">
+                        <label for="participants">Participants</label>
+                        <input type="number" ng-model="courseInstance.maxNumberOfParticipants" ng-maxlength="3" ng-required="true" min="0" class="form-control" id="participants"
+                               name="maxNumberOfParticipants" placeholder="Enter number of participants">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="lecturer">Lecturer</label>
+                        <select ng-model="courseInstance.lecturer" ng-options="c as c.displayName for (id, c) in lecturers track by c.id" class="form-control" id="lecturer">
+                            <option value=""> -- Select lecturer --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" ng-class="{'has-error': form.startTime.$dirty && form.startTime.$invalid}">
+                    <div class="col-md-6">
+                        <label for="startTime">Start time</label>
+                        <p class="input-group control-date-date">
+                            <input type="text" class="form-control" name="startTime" id="startTime" ng-model="courseInstance.startTime"
+                                   datepicker-popup is-open="startDateOpen" ng-required="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="input-group">
+                            <timepicker ng-model="courseInstance.startTime" minute-step="5"></timepicker>
+                        </p>
+                    </div>
+                    <div class="col-md-2 control-date-clear">
+                        <button type="button" class="btn btn-danger" ng-click="clearDate('startTime')" ng-show="courseInstance.startTime">Clear</button>
+                    </div>
+                </div><!-- div startTime row -->
+
+                <div class="form-group row" ng-class="{'has-error': form.endTime.$dirty && form.endTime.$invalid}">
+                    <div class="col-md-6">
+                        <label for="endTime">End time</label>
+                        <p class="input-group control-date-date">
+                            <input type="text" class="form-control" name="endTime" id="endTime" ng-model="courseInstance.endTime"
+                                   datepicker-popup is-open="endDateOpen" min-date="minDate" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate($event, 'endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <!--<label>Time</label>-->
+                        <p class="input-group">
+                            <timepicker ng-model="courseInstance.endTime" minute-step="5"></timepicker>
+                        </p>
+                    </div>
+                    <div class="col-md-2 control-date-clear">
+                        <button type="button" class="btn btn-danger" ng-click="clearDate('endTime')" ng-show="courseInstance.endTime">Clear</button>
+                    </div>
+                </div><!-- div endTime row -->
+
+                <button ng-click="save()" ng-disabled="form.$invalid || form.$pristine" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </button>
+
+                <div class="pull-right">
+                    <button ng-click="delete()" ng-show="courseInstance.id" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </button>
+                    <button ng-click="reset()" ng-show="form.$dirty" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-refresh"></span> Reset
+                    </button>
+                </div>
+            </form>
+        </div><!-- div panel-body -->
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div class="panel panel-info" ng-show="debug.visible">
+        <div class="panel-heading">
+            <button type="button" class="close" ng-click="debug.visible = false" aria-hidden="true">&times;</button>
+            Debug panel
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <pre>Form status = {
+    dirty: {{ form.$dirty }}
+}</pre>
+            </div>
+            <div class="col-md-6">
+                <pre>Working CourseInstance = {{courseInstance | json}}</pre>
+            </div>
+            <div class="col-md-6">
+                <pre>Master CourseInstance = {{masterCourseInstance | json}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3><span class="glyphicon glyphicon-user"></span> My profile</h3>
+        <table class="table">
+            <tr>
+                <td><strong>First name</strong></td>
+                <td>{{ currentUser.firstName }}</td>
+            </tr>
+            <tr>
+                <td><strong>Last name</strong></td>
+                <td>{{ currentUser.lastName }}</td>
+            </tr>
+            <tr>
+                <td><strong>Email</strong></td>
+                <td>{{ currentUser.email }}</td>
+            </tr>
+            <tr>
+                <td><strong>Username</strong></td>
+                <td>{{ currentUser.username }}</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h3><span class="fa fa-university"></span> My courses</h3>
+        <hr class="hidden-xs">
+    </div>
+    <hr class="visible-xs">
+</div>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+        <a class="btn btn-lg" ng-click="collapseManager.upcoming = !collapseManager.upcoming">
+            <span class="fa" ng-class="{'fa-chevron-down': collapseManager.upcoming, 'fa-chevron-up': !collapseManager.upcoming}"></span> My upcoming courses
+        </a>
+        <div collapse="collapseManager.upcoming">
+            <div class="list-group">
+                <a href="#/course/instance/{{ course.id }}" class="list-group-item" ng-repeat="course in upcomingCourses">
+                    <h4 class="list-group-item-heading">{{ course.name }}</h4>
+                    <p class="list-group-item-text text-justify"><b>Location:</b> {{ course.location }}</p>
+                    <p class="list-group-item-text text-justify"><b>Start time:</b> {{ course.startTime | myDate }}</p>
+                </a>
+
+                <a ng-href="#/course/list" class="list-group-item" ng-if="upcomingCourses.length == 0">
+                    <h4 class="text-center">You do not have any upcoming courses.</h4>
+                    <p class="list-group-item-text help-block text-center">Click to browse our courses.</p>
+                </a>
+            </div>
+        </div>
+        <hr class="visible-xs">
+    </div>
+    <div class="col-sm-5">
+        <a class="btn btn-lg" ng-click="collapseManager.registration = !collapseManager.registration">
+            <span class="fa" ng-class="{'fa-chevron-down': collapseManager.registration, 'fa-chevron-up': !collapseManager.registration}"></span> My registrations
+        </a>
+        <div collapse="collapseManager.registration">
+            <div class="list-group">
+                <a href="#/course/instance/{{ course.id }}" class="list-group-item" ng-repeat="course in registeredCourses">
+                    <h4 class="list-group-item-heading">{{ course.name }}</h4>
+                    <p class="list-group-item-text text-justify"><b>Location:</b> {{ course.location }}</p>
+                    <p class="list-group-item-text text-justify"><b>Start time:</b> {{ course.startTime | myDate }}h</p>
+                </a>
+
+                <a ng-href="#/course/list" class="list-group-item" ng-if="registeredCourses.length == 0">
+                    <h4 class="text-center">You do not have any registered courses.</h4>
+                    <p class="list-group-item-text help-block text-center">Click to browse our courses.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

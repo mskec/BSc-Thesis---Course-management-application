@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h2>Latest activity</h2>
+
+        <div ng-if="notifications.length == 0">
+            <p class="lead">No new activities at this time.</p>
+        </div>
+
+        <div class="list-group">
+            <!--<a href="#/courseInstance/display/{{ notification.courseId }}/{{ notification.courseInstanceId }}" class="list-group-item" ng-repeat="notification in notifications">-->
+            <div ng-click="open(notification)" class="list-group-item link" ng-repeat="notification in notifications">
+                <button type="button" class="close" ng-click="removeNotification($index)" aria-hidden="true"
+                        tooltip="Hide"  tooltip-trigger="mouseenter" tooltip-popup-delay="1000" tooltip-placement="top">&times;</button>
+                <span class="status-block pull-right hidden-xs hidden-sm">{{ notification.creationDate | date:"HH:mm dd.MM.yy" }}</span>
+                <h5 class="list-group-item-heading">{{ notification.text }}</h5>
+                <p class="list-group-item-text clearfix text-justify lead">{{ notification.comment }}
+                    <span class="status-block pull-right visible-xs visible-sm">{{ notification.creationDate | date:"HH:mm dd.MM.yy" }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

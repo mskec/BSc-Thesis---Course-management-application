@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h3 class="modal-title">Registration for {{ course.name }} course.</h3>
+</div>
+<div class="modal-body">
+    <form name="form" role="form">
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input type="text" ng-model="courseUser.comment" ng-maxlength="255" class="form-control" id="comment" name="comment" placeholder="Enter comment">
+            <p class="help-block">Optional</p>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <p class="help-block pull-left">To complete your registration press submit.</p>
+    <button class="btn btn-primary" ng-click="submit(courseUser)">Submit</button>
+    <button class="btn btn-warning" ng-click="registrationModal.dismiss('cancel')">Cancel</button>
+</div>
