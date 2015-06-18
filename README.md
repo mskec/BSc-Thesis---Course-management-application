@@ -1,2 +1,2 @@
-BSc Thesis - Course management applicatoin
-=========
+BSc Thesis - Course management application
+==
